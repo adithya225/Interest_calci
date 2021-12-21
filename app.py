@@ -50,7 +50,6 @@ def c_interest(p,r,s_date,e_date):
     rt=(r*12)/100
     start_date = list(map(int, s_date.split('/')))
     end_date = list(map(int, e_date.split('/')))
-    print(start_date,end_date)
     sd, sm, sy = start_date[0], start_date[1], start_date[2]
     ed, em, ey = end_date[0], end_date[1], end_date[2]
     if ed<sd:
@@ -152,7 +151,7 @@ s_model = s_interest
 
 @app.route('/')
 def home():
-    return render_template('index1.html')
+    return render_template('index.html')
 
 
 @app.route('/predict', methods=['POST'])
@@ -161,11 +160,8 @@ def predict():
     For rendering results on HTML GUI
     '''
     features = [str(x) for x in request.form.values()]
-    print(features)
     p = int(features[0])
-    print(p)
     r = float(features[1])
-    print(r)
     s_date = str(features[2])
     e_date = str(features[3])
     c_prediction = c_model(p,r,s_date,e_date)
@@ -188,7 +184,7 @@ def predict():
     s7 = "7) Final Amount with respect to SI is: {}".format(out1[6])
     s8 = "8) Interest for the Amount with respect to CI is: {}".format(out1[7])
     s9 = "9) Final Amount with respect to CI is: {}".format(out1[8])
-    return render_template('index1.html', prediction_text1=s1, prediction_text2=s2,prediction_text3=s3, prediction_text4=s4,prediction_text5=s5, prediction_text6=s6,prediction_text7=s7, prediction_text8=s8,prediction_text9=s9)
+    return render_template('index.html', prediction_text1=s1, prediction_text2=s2,prediction_text3=s3, prediction_text4=s4,prediction_text5=s5, prediction_text6=s6,prediction_text7=s7, prediction_text8=s8,prediction_text9=s9)
 
 
 if __name__ == "__main__":
