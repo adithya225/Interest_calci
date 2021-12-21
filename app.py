@@ -43,7 +43,6 @@ def total_days(s_date,e_date):
             else:
                 years=ey-sy
 
-
     td=days+(months*30)
     td1=td+(years*360)
     return td1
@@ -153,7 +152,7 @@ s_model = s_interest
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('index1.html')
 
 
 @app.route('/predict', methods=['POST'])
@@ -175,19 +174,21 @@ def predict():
     c_output = round(c_prediction, 0)
     s_output = round(s_prediction, 0)
     d_output = days
-    out1 = [d_output, s_output, s_output+p, c_output-p, c_output]
-    s = '''\
-    ... Total Number of Days is {0} .
-    ######################################################################################
-    ... Interest for the Amount with respect to SI is {1}.
-    ... Final Amount with respect to SI is {2}.
-    #######################################################################################
-    ... Interest for the Amount with respect to CI is {3}.
-    ... Final Amount with respect to CI is {4}.
-    #######################################################################################\
-    ... '''.format(out1[0], out1[1],out1[2],out1[3],out1[4])
-    #     out = '''Price with repect to RANDOM FOREST REGRESSION is {0} \n Price with respect to LINEAR REGRESSION is {1}'''.format(out1[0],out1[1])
-    return render_template('index.html', prediction_text=s)
+    principle = p
+    rate = r
+    start = s_date
+    end = e_date
+    out1 = [principle, rate, start, end, d_output, s_output, s_output+p, c_output-p, c_output]
+    s1 = "1) Principle Amount is: {0}".format(out1[0])
+    s2 = "2) Rate of Interest is: {0}".format(out1[1])
+    s3 = "3) Start Date: {0}".format(out1[2])
+    s4 = "4) End Date: {0}".format(out1[3])
+    s5 = "5) Total Number of Days is:  {0}".format(out1[4])
+    s6 = "6) Interest for the Amount with respect to SI is: {0}".format(out1[5])
+    s7 = "7) Final Amount with respect to SI is: {}".format(out1[6])
+    s8 = "8) Interest for the Amount with respect to CI is: {}".format(out1[7])
+    s9 = "9) Final Amount with respect to CI is: {}".format(out1[8])
+    return render_template('index1.html', prediction_text1=s1, prediction_text2=s2,prediction_text3=s3, prediction_text4=s4,prediction_text5=s5, prediction_text6=s6,prediction_text7=s7, prediction_text8=s8,prediction_text9=s9)
 
 
 if __name__ == "__main__":
