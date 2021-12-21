@@ -3,33 +3,59 @@
 <!--From https://codepen.io/frytyler/pen/EGdtg-->
 <head>
   <meta charset="UTF-8">
-  <title>ML API</title>
+  <title> Interest Calculator </title>
   <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
-  
-</head>
 
-<body>
+
+
+
+<style>
+  ::placeholder {
+    color:rgb(13, 13, 14);
+    opacity:0.8; /* Firefox */
+    font-weight: bold;
+  }
+  </style>
+
+</head>
+<body style="background-image: url('{{ url_for('static', filename='i6.jpg') }}');
+background-repeat:no-repeat;
+background-size:cover;
+height:100vh;
+display:flex;
+">
+
  <div class="login">
-	<h1>Interest Calculator</h1>
+	<h1 style="color:red; ">Interest Calculator</h1>
 
      <!-- Main Input For Receiving Query to our ML -->
-    <form action="{{ url_for('predict')}}"method="post">
-    	<input type="text" name="Principle Amount" placeholder="Principle Amount" required="required" />
-        <input type="text" name="Rate of Interest" placeholder="Rate of Interest" required="required" />
-	<input type="text" name="start date" placeholder="start date" required="required" />
-        <input type="text" name="end date" placeholder="end date" required="required" />
+    <form name="myform" action="{{ url_for('predict')}}"method="post" onsubmit="return(validateform());">
+        <input type="text" style="background-color:rgba(219, 228, 236,0.5); height: 45px;margin-bottom: 30px;" name="Principle Amount" placeholder="Principle Amount" required="required" />
+        <input type="text" style="background-color:rgba(219, 228, 236,0.5);height: 45px;margin-bottom: 30px;" name="Rate of Interest" placeholder="Rate of Interest" required="required" /><br>
+        <input type="text" style="background-color:rgba(219, 228, 236,0.5);height: 45px;margin-bottom: 30px;" name="start date" placeholder="start date" required="required" />
+        <input type="text" style="background-color:rgba(219, 228, 236,0.5);height: 45px;margin-bottom: 30px;" name="end date" placeholder="end date" required="required" /><br>
+        <button type="submit" class="btn btn-primary btn-block btn-large" style="margin-top: 20px;background-color:rgba(2, 255, 2,0.5);width: 400px;height: 45px;padding: 10pxl;font-size: 13px;text-shadow: 1px 1px 1px rgb(0,0,0);border: 1px solid rgba(0,0,0,0.3);"> Calculate </button>
 
-        <button type="submit" class="btn btn-primary btn-block btn-large">Calculate</button>
+
+<!--         <a href="visual" class="btn btn-primary btn-block btn-large" style="text-decoration: none;">Visualize</a> -->
     </form>
-
-   <br>
-   <br>
-   {{ prediction_text }}
-
+    <div>
+     <b><p style="margin-top: 40px;width:1000px;height: 10px;font-size: 40px;font-size: medium; rgba(255, 255, 2,0.5);"> Calculated Interest and Final Amount for Principle Amount for a Given Period of Time is Mentioned Below </p>
+         <p style="margin-top: 40px;width:500px;height: 10px;font-size: 40px;font-size: medium; rgba(2, 255, 255,0.5);">{{ prediction_text1 }}<br></p>
+         <p style="margin-top: 40px;width:500px;height: 10px;font-size: 40px;font-size: medium; rgba(2, 255, 255,0.5);">{{ prediction_text2 }}<br></p>
+         <p style="margin-top: 40px;width:500px;height: 10px;font-size: 40px;font-size: medium; rgba(2, 255, 255,0.5);">{{ prediction_text3 }}<br></p>
+         <p style="margin-top: 40px;width:500px;height: 10px;font-size: 40px;font-size: medium; rgba(2, 255, 255,0.5);">{{ prediction_text4 }}<br></p>
+         <p style="margin-top: 40px;width:500px;height: 10px;font-size: 40px;font-size: medium; rgba(2, 255, 255,0.5);">{{ prediction_text5 }}<br></p>
+         <p style="margin-top: 40px;width:500px;height: 10px;font-size: 40px;font-size: medium; rgba(2, 255, 255,0.5);">{{ prediction_text6 }}<br></p>
+         <p style="margin-top: 40px;width:500px;height: 10px;font-size: 40px;font-size: medium; rgba(2, 255, 255,0.5);">{{ prediction_text7 }}<br></p>
+         <p style="margin-top: 40px;width:500px;height: 10px;font-size: 40px;font-size: medium; rgba(2, 255, 255,0.5);">{{ prediction_text8 }}<br></p>
+         <p style="margin-top: 40px;width:500px;height: 50px;font-size: 40px;font-size: medium; rgba(2, 255, 255,0.5);">{{ prediction_text9 }}<br></p></b>
+     </div>
  </div>
+
 
 
 </body>
