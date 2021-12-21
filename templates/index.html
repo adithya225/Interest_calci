@@ -29,30 +29,32 @@ display:flex;
 ">
 
  <div class="login">
-	<h1 style="color:red; ">Interest Calculator</h1>
+     <h1 style="color:red; width:1000px; text-align:center; height: 75px;"><u><b>INTEREST CALCULATOR</b></u></h1>
 
      <!-- Main Input For Receiving Query to our ML -->
+     <center>
     <form name="myform" action="{{ url_for('predict')}}"method="post" onsubmit="return(validateform());">
-        <input type="text" style="background-color:rgba(219, 228, 236,0.5); height: 45px;margin-bottom: 30px;" name="Principle Amount" placeholder="Principle Amount" required="required" />
-        <input type="text" style="background-color:rgba(219, 228, 236,0.5);height: 45px;margin-bottom: 30px;" name="Rate of Interest" placeholder="Rate of Interest" required="required" /><br>
-        <input type="text" style="background-color:rgba(219, 228, 236,0.5);height: 45px;margin-bottom: 30px;" name="start date" placeholder="start date" required="required" />
-        <input type="text" style="background-color:rgba(219, 228, 236,0.5);height: 45px;margin-bottom: 30px;" name="end date" placeholder="end date" required="required" /><br>
-        <button type="submit" class="btn btn-primary btn-block btn-large" style="margin-top: 20px;background-color:rgba(2, 255, 2,0.5);width: 400px;height: 45px;padding: 10pxl;font-size: 13px;text-shadow: 1px 1px 1px rgb(0,0,0);border: 1px solid rgba(0,0,0,0.3);"> Calculate </button>
+        <input type="text" style="background-color:rgba(219, 228, 236,0.5);  height: 45px;margin-bottom: 30px;" name="Principle Amount" placeholder="Principle Amount" required="required" />
+        <input type="text" style="background-color:rgba(219, 228, 236,0.5); height: 45px;margin-bottom: 30px;" name="Rate of Interest" placeholder="Rate of Interest" required="required" /><br>
+        <input type="text" style="background-color:rgba(219, 228, 236,0.5);height: 45px;margin-bottom: 30px;" name="start date" placeholder="start date (dd/mm/yyyy)" required="required" />
+        <input type="text" style="background-color:rgba(219, 228, 236,0.5);height: 45px;margin-bottom: 30px;" name="end date" placeholder="end date (dd/mm/yyyy)" required="required" /><br>
+        <button type="submit" class="btn btn-primary btn-block btn-large" style="margin-top: 20px;background-color:rgba(2, 255, 2,0.5);width: 400px;height: 45px;padding: 10pxl;font-size: 13px;text-shadow: 1px 1px 1px rgb(0,0,0);border: 1px solid rgba(0,0,0,0.3);"><b> Calculate</b> </button>
 
 
 <!--         <a href="visual" class="btn btn-primary btn-block btn-large" style="text-decoration: none;">Visualize</a> -->
-    </form>
+    </form></center>
     <div>
-     <b><p style="margin-top: 40px;width:1000px;height: 10px;font-size: 40px;font-size: medium; rgba(255, 255, 2,0.5);"> Calculated Interest and Final Amount for Principle Amount for a Given Period of Time is Mentioned Below </p>
-         <p style="margin-top: 40px;width:600px;height: 10px;font-size: 40px;font-size: medium; rgba(2, 255, 255,0.5);">{{ prediction_text1 }}<br></p>
-         <p style="margin-top: 40px;width:600px;height: 10px;font-size: 40px;font-size: medium; rgba(2, 255, 255,0.5);">{{ prediction_text2 }}<br></p>
-         <p style="margin-top: 40px;width:600px;height: 10px;font-size: 40px;font-size: medium; rgba(2, 255, 255,0.5);">{{ prediction_text3 }}<br></p>
-         <p style="margin-top: 40px;width:600px;height: 10px;font-size: 40px;font-size: medium; rgba(2, 255, 255,0.5);">{{ prediction_text4 }}<br></p>
-         <p style="margin-top: 40px;width:600px;height: 10px;font-size: 40px;font-size: medium; rgba(2, 255, 255,0.5);">{{ prediction_text5 }}<br></p>
-         <p style="margin-top: 40px;width:600px;height: 10px;font-size: 40px;font-size: medium; rgba(2, 255, 255,0.5);">{{ prediction_text6 }}<br></p>
-         <p style="margin-top: 40px;width:600px;height: 10px;font-size: 40px;font-size: medium; rgba(2, 255, 255,0.5);">{{ prediction_text7 }}<br></p>
-         <p style="margin-top: 40px;width:600px;height: 10px;font-size: 40px;font-size: medium; rgba(2, 255, 255,0.5);">{{ prediction_text8 }}<br></p>
-         <p style="margin-top: 40px;width:600px;height: 50px;font-size: 40px;font-size: medium; rgba(2, 255, 255,0.5);">{{ prediction_text9 }}<br></p></b>
+        <b><p style="margin-top: 40px;width:1000px;text-align:center; height: 10px;font-size: 40px;font-size: medium; rgba(255, 255, 2,0.5);"> <b>Calculated Interest and Final Amount for Principle Amount for a Given Period of Time is Mentioned Below </b></p>
+            <center>
+         <p style="margin-top: 40px;width:500px;height: 10px;font-size: 40px;font-size: medium; rgba(2, 255, 255,0.5); text-align:left;">{{ prediction_text1 }}<br></p>
+         <p style="margin-top: 40px;width:500px;height: 10px;font-size: 40px;font-size: medium; rgba(2, 255, 255,0.5); text-align:left;">{{ prediction_text2 }}<br></p>
+         <p style="margin-top: 40px;width:500px;height: 10px;font-size: 40px;font-size: medium; rgba(2, 255, 255,0.5); text-align:left;">{{ prediction_text3 }}<br></p>
+         <p style="margin-top: 40px;width:500px;height: 10px;font-size: 40px;font-size: medium; rgba(2, 255, 255,0.5); text-align:left;">{{ prediction_text4 }}<br></p>
+         <p style="margin-top: 40px;width:500px;height: 10px;font-size: 40px;font-size: medium; rgba(2, 255, 255,0.5); text-align:left;">{{ prediction_text5 }}<br></p>
+         <p style="margin-top: 40px;width:500px;height: 10px;font-size: 40px;font-size: medium; rgba(2, 255, 255,0.5); text-align:left;">{{ prediction_text6 }}<br></p>
+         <p style="margin-top: 40px;width:500px;height: 10px;font-size: 40px;font-size: medium; rgba(2, 255, 255,0.5); text-align:left;">{{ prediction_text7 }}<br></p>
+         <p style="margin-top: 40px;width:500px;height: 10px;font-size: 40px;font-size: medium; rgba(2, 255, 255,0.5); text-align:left;">{{ prediction_text8 }}<br></p>
+                <p style="margin-top: 40px;width:500px;height: 50px;font-size: 40px;font-size: medium; rgba(2, 255, 255,0.5); text-align:left;">{{ prediction_text9 }}<br></p></center></b>
      </div>
  </div>
 
