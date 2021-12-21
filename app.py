@@ -180,10 +180,10 @@ def predict():
     s3 = "3) Start Date: {0}".format(out1[2])
     s4 = "4) End Date: {0}".format(out1[3])
     s5 = "5) Total Number of Days is:  {0}".format(out1[4])
-    s6 = "6) Interest for the Amount with respect to SI is: {0}".format(out1[5])
-    s7 = "7) Final Amount with respect to SI is: {}".format(out1[6])
-    s8 = "8) Interest for the Amount with respect to CI is: {}".format(out1[7])
-    s9 = "9) Final Amount with respect to CI is: {}".format(out1[8])
+    s6 = "6) Simple Interest for the Amount is: {0}".format(out1[5])
+    s7 = "7) Final Amount with respect to Simple Interest is: {}".format(out1[6])
+    s8 = "8) Compound Interest for the Amount is: {}".format(out1[7])
+    s9 = "9) Final Amount with respect to Compound Interest is: {}".format(out1[8])
     return render_template('index.html', prediction_text1=s1, prediction_text2=s2,prediction_text3=s3, prediction_text4=s4,prediction_text5=s5, prediction_text6=s6,prediction_text7=s7, prediction_text8=s8,prediction_text9=s9)
 
 
