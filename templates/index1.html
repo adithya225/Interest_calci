@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <title> Interest Calculator </title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+
+
+
+
+<style>
+  ::placeholder {
+    color:rgb(13, 13, 14);
+    opacity:0.8; /* Firefox */
+    font-weight: bold;
+  }
+  </style>
+
+</head>
+<body style="background-image: url('{{ url_for('static', filename='i6.jpg') }}');
+background-repeat:no-repeat;
+background-size:cover;
+height:100vh;
+display:flex;
+">
+
+ <div class="login">
+     <h1 style="color:red; width:1000px; text-align:center; height: 75px;"><u><b>INTEREST CALCULATOR</b></u></h1>
+
+     <!-- Main Input For Receiving Query to our ML -->
+     <center>
+       <a href='/login'> <button style="margin-top: 20px;background-color:rgba(2, 255, 2,0.5);width: 400px;height: 45px;padding: 10pxl;font-size: 13px;text-shadow: 1px 1px 1px rgb(0,0,0);border: 1px solid rgba(0,0,0,0.3);"><b> Login</b> </button>
+       </a></center>
+ </div>
+</body>
+</html>
