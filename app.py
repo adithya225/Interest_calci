@@ -1,8 +1,16 @@
-import numpy as np
-from flask import Flask, request, jsonify, render_template
-import pickle
+import pathlib
+import google
+from flask import Flask, request, render_template, session
+import os
+import requests
+from google.oauth2 import id_token
+from google_auth_oauthlib.flow import Flow
+from pip._vendor import cachecontrol
+from werkzeug.exceptions import abort
+from werkzeug.utils import redirect
 
 app = Flask(__name__)
+
 def total_days(s_date,e_date):
     start_date = list(map(int, s_date.split('/')))
     end_date = list(map(int, e_date.split('/')))
@@ -144,16 +152,68 @@ def s_interest(principle, r, s_date, e_date):
 
     interest = principle*t*rt
     return interest
-
 c_model = c_interest
 s_model = s_interest
 
+app.secret_key = "CodeSpecialit.com"
+os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
+GOOGLE_CLIENT_ID = "956614726164-vrjnh0qqumcnulh25mbiab7fsnnk7kpe.apps.googleusercontent.com"
+client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "client_secret.json")
+flow = Flow.from_client_secrets_file(
+    client_secrets_file=client_secrets_file,
+    scopes=["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email", "openid"],
+    redirect_uri="http://127.0.0.1:5000/callback"
+)
+def login_is_required(function):
+    def wrapper(*args, **kwargs):
+        if "google_id" not in session:
+            return abort(401)  # Authorization required
+        else:
+            return function()
 
+    return wrapper
 
-@app.route('/')
-def home():
+@app.route("/login")
+def login():
+    authorization_url, state = flow.authorization_url()
+    session["state"] = state
+    return redirect(authorization_url)
+
+@app.route("/callback")
+def callback():
+    flow.fetch_token(authorization_response=request.url)
+
+    if not session["state"] == request.args["state"]:
+        abort(500)  # State does not match!
+
+    credentials = flow.credentials
+    request_session = requests.session()
+    cached_session = cachecontrol.CacheControl(request_session)
+    token_request = google.auth.transport.requests.Request(session=cached_session)
+
+    id_info = id_token.verify_oauth2_token(
+        id_token=credentials._id_token,
+        request=token_request,
+        audience=GOOGLE_CLIENT_ID
+    )
+
+    session["google_id"] = id_info.get("sub")
+    session["name"] = id_info.get("name")
+    return redirect("/protected_area")
+
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect("/")
+
+@app.route("/")
+def index():
+    return render_template("index1.html")
+
+@app.route("/protected_area")
+@login_is_required
+def protected_area():
     return render_template('index.html')
-
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -189,7 +249,6 @@ def predict():
     s8 = "8) Interest for the Amount with respect to CI is: {}".format(out1[7])
     s9 = "9) Final Amount with respect to CI is: {}".format(out1[8])
     return render_template('index.html', prediction_text1=s1, prediction_text2=s2,prediction_text3=s3, prediction_text4=s4,prediction_text5=s5, prediction_text6=s6,prediction_text7=s7, prediction_text8=s8,prediction_text9=s9)
-
 
 if __name__ == "__main__":
     app.run(debug=True)
